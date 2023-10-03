@@ -1,0 +1,108 @@
+/* Create table about the famous people and what they do here */
+
+CREATE TABLE famous_people (id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER,
+    gender TEXT,
+    place_of_birth TEXT);
+
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Elon Musk", 52, "male", "South africa");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES   
+    ("Jeff Bezos", 59, "male",  "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Christiano ronaldo", "38", "male", "Portugal");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Lionel messi", 36, "male", "Argentina");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Dwayne Johnson", 51, "male", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Joe biden", 80, "male", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth) VALUES
+    ("Bill gates", 67, "male", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Selena gomez", 31, "female", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth ) VALUES
+    ("Robert downey", 58, "male", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth) VALUES
+    ("Donald trump", 77, "male", "United States");
+INSERT INTO famous_people (name, age, gender, place_of_birth) VALUES ('Mark zuckerberg', 39, 'male','United States');
+INSERT INTO famous_people (name, age, gender, place_of_birth) VALUES ('Oprah winfrey', 69, 'female' ,'United States');
+
+
+CREATE TABLE wealth ( id INTEGER PRIMARY KEY,
+ networth INTEGER,
+ wealth_source TEXT,
+ wealth_industry TEXT);
+
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('230,000,000,000', 'SpaceX,Tesla', 'Automotive');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('151,000,000,000', 'Amazon', 'Technology');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('500,000,000', 'Footballer', 'Sports');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('600,000,000', 'Footballer', 'Sports');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('800,000,000', 'Actor','Entertainment');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('9,000,000', 'politics', 'Government');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('117,000,000', 'Microsoft', 'Technology');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('95,000,000', 'Artist', 'Entertainment');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('300,000,000', 'Actor,Producer', 'Entertainment');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('2,500,000', 'Business', 'Real estate');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('104,000,000', 'Facebook', 'Technology');
+INSERT INTO wealth (networth, wealth_source, wealth_industry) VALUES ('2,500,000', 'Host,Philantropist', 'Entertainment');
+
+
+
+/* Find the source of wealth for each famous people  */
+SELECT famous_people.name, wealth.wealth_source
+FROM famous_people
+JOIN wealth
+ON famous_people.id = wealth.id;
+
+/*find the industry of each famous_people*/
+SELECT famous_people.name, wealth.wealth_industry
+FROM famous_people
+JOIN wealth
+ON famous_people.id = wealth.id;
+
+/* which famous person is a female and wealth industry is entertainment */
+SELECT famous_people.gender, wealth.wealth_industry
+FROM famous_people
+JOIN wealth ON famous_people.id = wealth.id
+WHERE gender = 'female' OR wealth_industry = 'entertainment' 
+
+
+/*Table with personal info on the famous people*/
+
+
+CREATE TABLE personal (famous_people_id INTEGER,
+    relationship_status TEXT,
+    college_name TEXT,
+    no_of_children INTEGER,
+    zodiac_sign TEXT,
+    weight_kg  INTEGER);
+
+
+
+ INSERT INTO personal (relationship_status,college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('divorced','Stanford university', '6','cancer','82');
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('Married','Princeton university', '4','capricorn','70');
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ( 'Dating','Mount Gravatt State' ,'6', 'aquarius','84');
+ INSERT INTO personal (relationship_status,college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('Married','NIL','4','cancer', '72');  
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('Married','University of miami','3','Taurus','119');
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('Divorced', 'University of delaware', '4', 'scorpio', '97');
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ("divorced', 'harvard university' , '3', 'libra', '74');
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('single', 'NIL', 'NIL', 'cancer', '55');    
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('married', 'santa monica', '3', 'Aries', '74'); 
+ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('married', 'university of pennsylvania', '5', 'Gemini', '110');
+INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('Married', 'Harvard university', '3', 'Taurus', '70');
+INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_sign, weight_kg) VALUES ('dating', 'Tennessee state university', 'NIL', 'aquarius', '65') ;
+
+
+/* outer join */ 
+SELECT famous_people.name, personal.no_of_children
+FROM famous_people
+LEFT OUTER JOIN personal
+ON famous_people.id = personal.id;
+
+/* self join */
+SELECT wealth.networth, personal.college_name
+FROM wealth
+JOIN personal
+ON wealth.id = personal.id;
