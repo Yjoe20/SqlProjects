@@ -96,13 +96,13 @@ INSERT INTO personal (relationship_status, college_name, no_of_children,zodiac_s
 
 
 /* outer join */ 
-SELECT famous_people.name, personal.no_of_children
-FROM famous_people
+SELECT famous_people.name, personal.no_of_children,
+FROM famous_people,
 LEFT OUTER JOIN personal
 ON famous_people.id = personal.id;
 
 /* self join */
-SELECT wealth.networth, personal.college_name
-FROM wealth
+SELECT wealth.networth, personal.college_name,
+FROM wealth,
 JOIN personal
 ON wealth.id = personal.id;
